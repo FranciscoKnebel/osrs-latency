@@ -15,20 +15,42 @@ module.exports = (cb) => {
       Object.keys(rows).forEach(key => {
         const row = rows[key];
 
+        let id;
+        let activity;
         if (row.children) {
           if (row.children[0]) {
-            worlds_p2p.push(Number.parseInt(row.children[0].next.children[1].children[0].data.split('School ')[1]));
+            id = Number.parseInt(row.children[0].next.children[1].children[0].data.split('School ')[1]);
+          }
+          if (row.children[9]) {
+            activity = row.children[9].children[0].data;
           }
         }
+
+        worlds_p2p.push({
+          id,
+          activity
+        });
       });
 
       rows = $('.server-list__row:not(.server-list__row--members)');
       Object.keys(rows).forEach(key => {
         const row = rows[key];
 
+        let id;
+        let activity;
         if (row.children) {
           if (row.children[0]) {
-            worlds_f2p.push(Number.parseInt(row.children[0].next.children[1].children[0].data.split('School ')[1]));
+            if (row.children[0]) {
+              id = Number.parseInt(row.children[0].next.children[1].children[0].data.split('School ')[1]);
+            }
+            if (row.children[9]) {
+              activity = row.children[9].children[0].data;
+            }
+
+            worlds_f2p.push({
+              id,
+              activity
+            });
           }
         }
       });
