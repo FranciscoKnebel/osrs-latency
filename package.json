@@ -1,6 +1,6 @@
 {
   "name": "osrs-latency",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Check Old School Runescape world latency.",
   "main": "index.js",
   "bin": {
