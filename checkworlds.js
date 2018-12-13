@@ -55,15 +55,14 @@ module.exports = ({
   }
 
   getWorlds(async data => {
-    console.log(data);
     if (checkF2P) {
       f2p.worlds = data.worlds_f2p;
 
       console.log('\nFree to Play Worlds'.bold);
       f2p.worlds = f2p.worlds.sort((a, b) => a.id - b.id);
-      f2p.worlds.forEach((world, index) => {
+      f2p.worlds.forEach((world) => {
         f2p.ids.push({
-          id: 300 + index,
+          id: 300 + world.id,
           activity: world.activity
         });
         f2p.promises.push(ping.promise.probe(url(world.id)));
@@ -76,9 +75,9 @@ module.exports = ({
 
       console.log('\nPay to Play Worlds'.bold);
       p2p.worlds = p2p.worlds.sort((a, b) => a.id - b.id);
-      p2p.worlds.forEach((world, index) => {
+      p2p.worlds.forEach((world) => {
         p2p.ids.push({
-          id: 300 + index,
+          id: 300 + world.id,
           activity: world.activity
         });
         p2p.promises.push(ping.promise.probe(url(world.id)));
