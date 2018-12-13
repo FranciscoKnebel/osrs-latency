@@ -1,8 +1,7 @@
 {
-  "name": "checkworlds",
-  "version": "1.0.0",
+  "name": "osrs-latency",
+  "version": "0.1.0",
   "description": "Check Old School Runescape world latency.",
-  "main": "checkworlds.js",
   "scripts": {
     "start": "node checkworlds.js"
   },
