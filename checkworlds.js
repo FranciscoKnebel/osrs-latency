@@ -21,7 +21,8 @@ function getLatencyOfWorlds(promises, ids) {
       (data) => data.map((value, index) => ({
         world: ids[index].id,
         ms: value.time,
-        activity: ids[index].activity
+        players: ids[index].players,
+        activity: ids[index].activity,
       }))
     )
     .then(data => data.filter(e => e.ms !== 'unknown'))
@@ -35,6 +36,8 @@ function getLatencyOfWorlds(promises, ids) {
       console.log(
         'Lowest latency world:',
         `World ${worlds[0].world}`.underline.bold,
+        '-',
+        `${worlds[0].players} players`.underline,
         '-',
         `${worlds[0].ms} ms`.underline.bold,
         `${worlds[0].activity === '-' ? '' : '- ' + worlds[0].activity.bold}`,
@@ -63,7 +66,8 @@ module.exports = ({
       f2p.worlds.forEach((world) => {
         f2p.ids.push({
           id: 300 + world.id,
-          activity: world.activity
+          activity: world.activity,
+          players: world.players
         });
         f2p.promises.push(ping.promise.probe(url(world.id)));
       });
@@ -78,7 +82,8 @@ module.exports = ({
       p2p.worlds.forEach((world) => {
         p2p.ids.push({
           id: 300 + world.id,
-          activity: world.activity
+          activity: world.activity,
+          players: world.players
         });
         p2p.promises.push(ping.promise.probe(url(world.id)));
       });

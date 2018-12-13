@@ -17,6 +17,7 @@ module.exports = (cb) => {
 
         let id;
         let activity;
+        let players;
         if (row.children) {
           if (row.children[0]) {
             id = Number.parseInt(row.children[0].next.children[1].children[0].data.split('School ')[1]);
@@ -24,11 +25,15 @@ module.exports = (cb) => {
           if (row.children[9]) {
             activity = row.children[9].children[0].data;
           }
+          if (row.children[2]) {
+            players = Number.parseInt(row.children[2].next.children[0].data.split(' ')[0]);
+          }
         }
 
         worlds_p2p.push({
           id,
-          activity
+          activity,
+          players
         });
       });
 
@@ -38,6 +43,7 @@ module.exports = (cb) => {
 
         let id;
         let activity;
+        let players;
         if (row.children) {
           if (row.children[0]) {
             if (row.children[0]) {
@@ -46,10 +52,14 @@ module.exports = (cb) => {
             if (row.children[9]) {
               activity = row.children[9].children[0].data;
             }
+            if (row.children[2]) {
+              players = Number.parseInt(row.children[2].next.children[0].data.split(' ')[0]);
+            }
 
             worlds_f2p.push({
               id,
-              activity
+              activity,
+              players
             });
           }
         }
