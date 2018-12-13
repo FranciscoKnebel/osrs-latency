@@ -7,20 +7,36 @@ module.exports = (cb) => {
       cb();
     } else {
       const $ = res.$;
-      const worlds = [];
-      rows = $('.server-list__row');
 
+      const worlds_p2p = [];
+      const worlds_f2p = [];
+
+      rows = $('.server-list__row.server-list__row--members');
       Object.keys(rows).forEach(key => {
         const row = rows[key];
 
         if (row.children) {
           if (row.children[0]) {
-            worlds.push(Number.parseInt(row.children[0].next.children[1].children[0].data.split('School ')[1]));
+            worlds_p2p.push(Number.parseInt(row.children[0].next.children[1].children[0].data.split('School ')[1]));
           }
         }
       });
 
-      cb(worlds);
+      rows = $('.server-list__row:not(.server-list__row--members)');
+      Object.keys(rows).forEach(key => {
+        const row = rows[key];
+
+        if (row.children) {
+          if (row.children[0]) {
+            worlds_f2p.push(Number.parseInt(row.children[0].next.children[1].children[0].data.split('School ')[1]));
+          }
+        }
+      });
+
+      cb({
+        worlds_p2p,
+        worlds_f2p
+      });
     }
   }
 
