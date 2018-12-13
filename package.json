@@ -31,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/FranciscoKnebel/osrs-latency/issues"
   },
-  "homepage": "https://github.com/FranciscoKnebel/osrs-latency#readme"
+  "homepage": "https://github.com/FranciscoKnebel/osrs-latency#readme",
+  "engines": {
+    "node": ">=7.8.0"
+  }
 }
