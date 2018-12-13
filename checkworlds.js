@@ -1,16 +1,17 @@
 const ping = require('ping');
-require('colors');
 const getWorlds = require('./getworlds');
 
 const
   url = (id) => `oldschool${id}.runescape.com`,
   p2p = {
     promises: [],
-    ids: []
+    ids: [],
+    worlds: []
   },
   f2p = {
     promises: [],
-    ids: []
+    ids: [],
+    worlds: []
   };
 
 function getLatencyOfWorlds(promises, ids) {
@@ -41,27 +42,40 @@ function getLatencyOfWorlds(promises, ids) {
     });
 }
 
-getWorlds(async data => {
-  let {
-    worlds_p2p,
-    worlds_f2p
-  } = data;
+module.exports = ({
+  checkF2P = true,
+  checkP2P = true
+}) => {
+  if (!checkF2P && !checkP2P) {
+    console.log('F2P and P2P worlds disabled.')
+    return;
+  }
 
-  console.log('OSRS World Latency'.underline.bold);
+  getWorlds(async data => {
 
-  console.log('\nFree to Play Worlds'.bold);
-  worlds_f2p = worlds_f2p.sort((a, b) => a - b);
-  worlds_f2p.forEach((world, index) => {
-    f2p.ids.push(300 + index);
-    f2p.promises.push(ping.promise.probe(url(world)));
+    if (checkF2P) {
+      f2p.worlds = data.worlds_f2p;
+
+      console.log('\nFree to Play Worlds'.bold);
+      f2p.worlds = f2p.worlds.sort((a, b) => a - b);
+      f2p.worlds.forEach((world, index) => {
+        f2p.ids.push(300 + index);
+        f2p.promises.push(ping.promise.probe(url(world)));
+      });
+      await getLatencyOfWorlds(f2p.promises, f2p.ids);
+    }
+
+    if (checkP2P) {
+      p2p.worlds = data.worlds_p2p;
+
+      console.log('\nPay to Play Worlds'.bold);
+      p2p.worlds = p2p.worlds.sort((a, b) => a - b);
+      p2p.worlds.forEach((world, index) => {
+        p2p.ids.push(300 + index);
+        p2p.promises.push(ping.promise.probe(url(world)));
+      });
+      await getLatencyOfWorlds(p2p.promises, p2p.ids);
+    }
+
   });
-  await getLatencyOfWorlds(f2p.promises, f2p.ids);
-
-  console.log('\nPay to Play Worlds'.bold);
-  worlds_p2p = worlds_p2p.sort((a, b) => a - b);
-  worlds_p2p.forEach((world, index) => {
-    p2p.ids.push(300 + index);
-    p2p.promises.push(ping.promise.probe(url(world)));
-  });
-  await getLatencyOfWorlds(p2p.promises, p2p.ids);
-});
+}
