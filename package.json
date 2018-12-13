@@ -14,5 +14,22 @@
     "ping": "^0.2.2",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FranciscoKnebel/osrs-latency.git"
+  },
+  "keywords": [
+    "old",
+    "school",
+    "runescape",
+    "osrs",
+    "latency",
+    "ping"
+  ],
+  "bugs": {
+    "url": "https://github.com/FranciscoKnebel/osrs-latency/issues"
+  },
+  "homepage": "https://github.com/FranciscoKnebel/osrs-latency#readme"
 }
