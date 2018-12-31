@@ -14,8 +14,8 @@ function readWorlds(filename) {
 }
 
 const value = {
-  worlds_f2p: readWorlds('worlds/f2p'),
-  worlds_p2p: readWorlds('worlds/p2p'),
+  worlds_f2p: readWorlds('./worlds/f2p'),
+  worlds_p2p: readWorlds('./worlds/p2p'),
 }
 
 module.exports = () => value;
