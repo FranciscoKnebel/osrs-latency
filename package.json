@@ -7,7 +7,8 @@
     "osrs-latency": "./index.js"
   },
   "scripts": {
-    "start": "node checkworlds.js"
+    "start": "node checkworlds.js",
+    "backup": "./worlds/backupworlds.js"
   },
   "author": "Francisco Knebel <franciscopaivaknebel@gmail.com>",
   "license": "MIT",
